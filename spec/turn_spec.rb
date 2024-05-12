@@ -171,8 +171,10 @@ RSpec.describe Turn do
     turn = Turn.new(player1, player2)
     
     expect(turn.pile_cards).to eq [card1, card3]
-    expect(player1.deck.cards.count).to be 3
-    expect(player2.deck.cards.count).to be 3
+    expect(player1.deck).to eq deck1
+    expect(player2.deck).to eq deck2
+    expect(player1.deck.cards).to eq [card2, card5, card8]
+    expect(player2.deck.cards).to eq [card4, card6, card7]
   end
 
   it "can pile cards when type :war" do
@@ -236,7 +238,7 @@ RSpec.describe Turn do
     turn.award_spoils(winner)
   
     expect(player1.deck.cards.length).to eq 5
-    expect(player2.deck.cards.length).to eq 3
+    expect(player2.deck.cards).to eq [card4, card6, card7]
   end
 
   it "can award spoils to winner deck turn :war" do

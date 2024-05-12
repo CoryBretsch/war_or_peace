@@ -21,46 +21,32 @@ class Turn
     end
   end
 
-  def winner #.reduce or .inject
+  def winner 
     if type == :basic
-      player = nil
-      hash = {player1 => player1.deck.rank_of_card_at(0),
-              player2 => player2.deck.rank_of_card_at(0)}
-      hash.each do |key, value|
-        if player == nil
-          player = key
-        else 
-          player = key if value > player.deck.rank_of_card_at(0)
-        end
-      end
-      player
+      find_player(0)
     elsif type == :war
-      player = nil
-      hash = {player1 => player1.deck.rank_of_card_at(2),
-              player2 => player2.deck.rank_of_card_at(2)}
-      hash.each do |key, value|
-        if player == nil
-          player = key
-        else 
-          player = key if value > player.deck.rank_of_card_at(2)
-        end
-      end
-      player
+      find_player(2)
     else
       "No Winner"
     end
   end
 
+  def find_player(card_position)
+    player_rank_hash = {player1 => player1.deck.rank_of_card_at(card_position),
+                        player2 => player2.deck.rank_of_card_at(card_position)}
+    player_rank_hash.max_by{|player, rank_of_card| rank_of_card}[0]
+  end
+
   def pile_cards
     if type == :basic 
-      spoils_of_war << player1.deck.remove_card
-      spoils_of_war << player2.deck.remove_card
+      pile_cards_helper(player1)
+      pile_cards_helper(player2)
     elsif type == :war
       3.times do
-        spoils_of_war << player1.deck.remove_card
+        pile_cards_helper(player1)
       end
       3.times do
-        spoils_of_war << player2.deck.remove_card
+        pile_cards_helper(player2)
       end
     else
       3.times do
@@ -70,6 +56,10 @@ class Turn
         player2.deck.remove_card
       end
     end
+  end
+
+  def pile_cards_helper(player)
+    spoils_of_war << player.deck.remove_card
   end
 
   def award_spoils(winner)
