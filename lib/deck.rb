@@ -1,5 +1,5 @@
 class Deck 
-  attr_reader :cards
+  attr_accessor :cards
 
   def initialize(cards)
     @cards = cards
@@ -24,6 +24,6 @@ class Deck
   end
 
   def add_card(card)
-    cards.push(card)
+    cards.push(card).flatten!
   end
 end
