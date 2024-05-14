@@ -1,10 +1,4 @@
-require 'rspec'
-require './lib/card'
-require './lib/deck'
-
-RSpec.configure do |config|
-  config.formatter = :documentation
-end
+require 'spec_helper'
 
 RSpec.describe Deck do
   it "exists" do

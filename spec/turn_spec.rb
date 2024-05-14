@@ -1,12 +1,4 @@
-require 'rspec'
-require './lib/card'
-require './lib/deck'
-require './lib/player'
-require './lib/turn'
-
-RSpec.configure do |config|
-  config.formatter = :documentation
-end
+require 'spec_helper'
 
 RSpec.describe Turn do
   it "exists" do

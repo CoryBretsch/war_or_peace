@@ -1,9 +1,4 @@
-require 'rspec'
-require './lib/card'
-
-RSpec.configure do |config|
-  config.formatter = :documentation
-end
+require 'spec_helper'
 
 RSpec.describe Card do
   it "exists" do
@@ -19,4 +14,5 @@ RSpec.describe Card do
     expect(card.value).to eq('Queen')
     expect(card.rank).to eq(12)
   end
+
 end

@@ -23,15 +23,15 @@ class Turn
 
   def winner 
     if type == :basic
-      find_player(0)
+      winner_helper(0)
     elsif type == :war
-      find_player(2)
+      winner_helper(2)
     else
       "No Winner"
     end
   end
 
-  def find_player(card_position)
+  def winner_helper(card_position)
     player_rank_hash = {player1 => player1.deck.rank_of_card_at(card_position),
                         player2 => player2.deck.rank_of_card_at(card_position)}
     player_rank_hash.max_by{|player, rank_of_card| rank_of_card}[0]
