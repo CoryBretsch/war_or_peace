@@ -25,7 +25,7 @@ class Turn
     if type == :basic
       winner_helper(0)
     elsif type == :war
-      winner_helper(2)
+      winner_helper(0) && winner_helper(2)
     else
       "No Winner"
     end
