@@ -11,10 +11,12 @@ class Turn
   end
 
   def type
-    if player1.deck.rank_of_card_at(0)== player2.deck.rank_of_card_at(0) && 
+    if player1.deck.cards.count >= 3 && player2.deck.cards.count >=3 && 
+      player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) && 
       player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
       :mutually_assured_destruction
-    elsif player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0)
+    elsif player1.deck.cards.count >= 3 && player2.deck.cards.count >=3 &&
+      player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0)
       :war
     else 
       :basic
@@ -22,10 +24,10 @@ class Turn
   end
 
   def winner 
-    if type == :basic
-      winner_helper(0)
-    elsif type == :war
-      winner_helper(0) && winner_helper(2)
+    if type == :war
+      winner_helper(2)
+    elsif type == :basic
+      winner_helper(0) 
     else
       "No Winner"
     end
@@ -42,19 +44,19 @@ class Turn
       pile_cards_helper(player1)
       pile_cards_helper(player2)
     elsif type == :war
-      3.times do
-        pile_cards_helper(player1)
-      end
-      3.times do
-        pile_cards_helper(player2)
-      end
+      pile_cards_helper(player1)
+      pile_cards_helper(player2)
+      pile_cards_helper(player1)
+      pile_cards_helper(player2)
+      pile_cards_helper(player1)
+      pile_cards_helper(player2)
     else
-      3.times do
-        player1.deck.remove_card
-      end
-      3.times do
-        player2.deck.remove_card
-      end
+      pile_cards_helper(player1)
+      pile_cards_helper(player2)
+      pile_cards_helper(player1)
+      pile_cards_helper(player2)
+      pile_cards_helper(player1)
+      pile_cards_helper(player2)
     end
   end
 

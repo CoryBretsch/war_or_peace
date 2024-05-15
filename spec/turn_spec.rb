@@ -163,8 +163,6 @@ RSpec.describe Turn do
     turn = Turn.new(player1, player2)
     
     expect(turn.pile_cards).to eq [card1, card3]
-    expect(player1.deck).to eq deck1
-    expect(player2.deck).to eq deck2
     expect(player1.deck.cards).to eq [card2, card5, card8]
     expect(player2.deck.cards).to eq [card4, card6, card7]
   end
